@@ -1,0 +1,53 @@
+﻿<Window x:Class="BiuBiuQ.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vlv="clr-namespace:BiuBiuQ.View.VideoList"
+        xmlns:dv="clr-namespace:BiuBiuQ.View.VideoDown"
+        xmlns:uv="clr-namespace:BiuBiuQ.View.User"
+        xmlns:cf="clr-namespace:BiuBiuQ.View.Config"
+        xmlns:vlvm="clr-namespace:BiuBiuQ.ViewModel.VideoList"
+        xmlns:local="clr-namespace:BiuBiuQ.View"
+        mc:Ignorable="d"
+        Title="BiuBiuQ" Height="600" Width="880" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <TabControl x:Name="tabControl" TabStripPlacement="Left">
+            <TabItem Header="搜索" Height="40" Width="100">
+                <Grid Background="#FFE5E5E5">
+                    <vlv:VideoListView />
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="下载" Height="40" Width="100">
+                <TabControl>
+                    <TabItem Header="待下载" Height="30" Width="80">
+                        <Grid Background="#FFE5E5E5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <dv:VideoDownWaitView Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="下载中" Height="30" Width="80">
+                        <Grid>
+                            <dv:VideoDowningView/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="已下载" Height="30" Width="80">
+                        <Grid Background="#FFE5E5E5">
+                            <dv:VideoDownedView/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="设置" Height="40" Width="100">
+                <cf:ConfigView/>
+            </TabItem>
+            <TabItem Header="用户" Height="40" Width="100">
+                <uv:UserView/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

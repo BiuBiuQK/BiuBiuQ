@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="BiuBiuQ.View.VideoList.VideoListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiuBiuQ.View"
+        xmlns:vm="clr-namespace:BiuBiuQ.ViewModel.VideoList"
+             xmlns:vc="clr-namespace:BiuBiuQ.ViewModel.Common"
+        mc:Ignorable="d"
+        MinHeight="400" MinWidth="400" Margin="3">
+    <UserControl.Resources>
+        <vc:TimeConverter x:Key="TimeConverter"></vc:TimeConverter>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="28">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="B站视频链接：" VerticalAlignment="Center"></TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding Url,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25" VerticalContentAlignment="Center"></TextBox>
+            <Button Grid.Column="2" Content="获取视频" Command="{Binding LoadVideoCommand}" Width="60"></Button>
+        </Grid>
+        <StackPanel Grid.Row="1">
+
+            <Grid Margin="0,5,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="130"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="合集bvid：" Grid.Row="0" Grid.Column="0" Margin="0,3,0,3" Width="60" HorizontalAlignment="Left" />
+                <TextBlock Text="{Binding VideoCollection.Bvid}" Grid.Row="0" Grid.Column="1"  Margin="0,3,0,3"  Width="Auto" HorizontalAlignment="Left"  TextAlignment="Left"/>
+                <TextBlock Text="发布时间：" Grid.Row="0" Grid.Column="2" Margin="0,3,0,3" Width="60" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding VideoCollection.Ctime,Converter={StaticResource TimeConverter}}" Grid.Row="0" Grid.Column="3" Margin="0,3,0,3" Width="Auto" HorizontalAlignment="Left" TextAlignment="Left"/>
+                <TextBlock Text="视频数量：" Grid.Row="0" Grid.Column="4" Margin="0,3,0,3" Width="60" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding VideoCollection.Videos}" Grid.Row="0" Grid.Column="5" Margin="0,3,0,3" Width="Auto" HorizontalAlignment="Left"  TextAlignment="Left"/>
+                <TextBlock Text="发布者：" Grid.Row="0" Grid.Column="6" Margin="0,3,0,3" Width="45" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding VideoCollection.OwnerName}" Grid.Row="0" Grid.Column="7" Margin="0,3,0,3" Width="Auto" HorizontalAlignment="Left"  TextAlignment="Left"/>
+
+                <TextBlock Text="合集标题：" Grid.Row="1" Grid.Column="0" Margin="0,3,0,3" Width="60" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding VideoCollection.Title}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Margin="0,3,0,3" Width="Auto" HorizontalAlignment="Left"/>
+                
+                <TextBlock Text="合集描述：" Grid.Row="2" Grid.Column="0" Margin="0,3,0,3" Width="60" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding VideoCollection.Desc}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" Margin="0,3,0,3" Width="Auto" HorizontalAlignment="Left"/>
+                
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="2" Margin="0,3,0,5">
+            <StackPanel >
+                <Button Content="添加到下载" Height="30" Width="80" HorizontalAlignment="Left" Command="{Binding AddToDowningCommand}"></Button>
+            </StackPanel>
+        </Grid>
+        <ListView Grid.Row="3" ItemsSource="{Binding VideoInfos}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="60">
+                        <GridViewColumn.Header>
+                            <CheckBox Content="全选" IsChecked="{Binding IsAllSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Command="{Binding SelectAllCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsChecked}"></CheckBox>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="选集" DisplayMemberBinding="{Binding VideoInfoModel.Page}" />
+                    <!--<GridViewColumn Header="bvid" DisplayMemberBinding="{Binding VideoInfoModel.Bvid}"/>
+                    <GridViewColumn Header="cvid" DisplayMemberBinding="{Binding VideoInfoModel.Cid}"/>-->
+                    <GridViewColumn Header="标题" DisplayMemberBinding="{Binding VideoInfoModel.Title}"/>
+                    <GridViewColumn Header="时长" DisplayMemberBinding="{Binding VideoInfoModel.Duration,Converter={StaticResource TimeConverter}}"/>
+                    <!--<GridViewColumn Header="状态" DisplayMemberBinding="{Binding Status}"/>-->
+                    <!--<GridViewColumn>
+                        <GridViewColumn.Header>操作</GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding Path=DataContext.AddToDowningCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}, Mode=FindAncestor}}" CommandParameter="{Binding .}">添加下载</Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
