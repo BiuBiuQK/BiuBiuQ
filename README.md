@@ -10,6 +10,7 @@ B站视频下载说明
 2.设置：设置保存目录和下载并发数
 
 3.搜索：复制B站视频链接到搜索框，注意需要有Bvid的那种视频链接，下面示例链接的BV1iu411F7ix就是Bvid
+
 示例：https://www.bilibili.com/video/BV1iu411F7ix?p=7&spm_id_from=pageDriver&vd_source=c8db1130312fa78834b75af4bd7f39d1
 
 4.下载：获取视频列表，然后添加到下载，可以单个下载，也可以全部下载，下载完成后，可以打开对应目录
