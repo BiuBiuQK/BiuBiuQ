@@ -16,5 +16,8 @@ B站视频下载说明
 4.下载：获取视频列表，然后添加到下载，可以单个下载，也可以全部下载，下载完成后，可以打开对应目录
 
 
+运行环境基于.NET6 需要安装.NET 6.0 Desktop Runtime
+
+https://dotnet.microsoft.com/zh-cn/download/dotnet/thank-you/runtime-desktop-6.0.25-windows-x64-installer?cid=getdotnetcore
 
 
