@@ -23,3 +23,8 @@ B站视频下载说明
 https://dotnet.microsoft.com/zh-cn/download/dotnet/thank-you/runtime-desktop-6.0.25-windows-x64-installer?cid=getdotnetcore
 
 使用ffmpeg进行音视频合并，这里的ffmpeg用了一个旧版的文件小一点，功能够用，新版的文件比较大100多M了
+
+
+工具下载
+
+https://github.com/BiuPiuQ/BiuBiuQ/releases/download/v1.0.0.0/BiuBiuQ_v1.0.0.0_Release_net6.0-windows.zip
